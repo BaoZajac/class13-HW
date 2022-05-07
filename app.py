@@ -1,26 +1,28 @@
 import sys
+from flask import Flask, render_template
 
 historia_operacji = []
 magazyn = {}
 
 # file_path = "pliki_pomocnicze/in.txt" #TODO: na przyszłość - przerobić na wczytywanie pliku niezależne od podkatalogów
-file_path = sys.argv[1]
+# file_path = sys.argv[1]
+file_path = "in.txt"
 
 
-class Manager:
-    def __init__(self):
-        self.actions = {}
-
-    def assign(self, name):
-        def decorate(cb):
-            self.actions[name] = cb
-        return decorate
-
-    def execute(self, name):
-        if name not in self.actions:
-            print("Action not defined")
-        else:
-            self.actions[name](self)
+# class Manager:
+#     def __init__(self):
+#         self.actions = {}
+#
+#     def assign(self, name):
+#         def decorate(cb):
+#             self.actions[name] = cb
+#         return decorate
+#
+#     def execute(self, name):
+#         if name not in self.actions:
+#             print("Action not defined")
+#         else:
+#             self.actions[name](self)
 
 
 # wczytywanie danych z zewnętrznego pliku z historią operacji i zapisanie ich do historii operacji wewnątrz programu
@@ -77,9 +79,9 @@ def historia_na_dzialania():
         elif polecenie[0] == "sprzedaz":
             kwota = int(polecenie[2]) * int(polecenie[3])
             saldo += kwota
-            if len(sys.argv) > 2:
-                if not magazyn.get(sys.argv[2]):
-                    magazyn[sys.argv[2]] = 0
+            # if len(sys.argv) > 2:
+            #     if not magazyn.get(sys.argv[2]):
+            #         magazyn[sys.argv[2]] = 0
             liczba_sztuk_w_magazynie = int(magazyn[polecenie[1]])
             if liczba_sztuk_w_magazynie < int(polecenie[3]) or int(polecenie[2]) < 0 or int(polecenie[3]) < 0:
                 # saldo -= kwota
@@ -92,25 +94,35 @@ def historia_na_dzialania():
 
 # zapisanie danych historii operacji do pliku
 def zapis_do_pliku():
-    with open(sys.argv[1], 'w') as f:
+    with open(file_path, 'w') as f:
         f.write("")
     for element in historia_operacji:
         for element2 in element:
-            with open(sys.argv[1], 'a') as f:
+            with open(file_path, 'a') as f:
                 f.write(element2 + "\n")
 
 
-manager = Manager()
+# manager = Manager()
+app = Flask(__name__)
 
 
-@manager.assign("konto")
-def konto_func(abc):
+# @app.route('/')
+# # @manager.assign("konto")
+# def konto_func():  # (abc):
+#     dotychczasowa_historia_operacji()
+#     saldo = historia_na_dzialania()[0]
+#     return render_template("main.html", saldo=saldo)
+
+
+@app.route('/')
+def stan_magazynu():
     dotychczasowa_historia_operacji()
-    saldo = historia_na_dzialania()[0]
-    print(saldo)
-    
+    historia_na_dzialania()[1]
+    # saldo = historia_na_dzialania()[0]
+    return render_template("main.html", magazyn=magazyn)  #, saldo=saldo)  #.items())
 
-# wykonywane tylko przy odpaleniu tego pliku, czyli accountant.py
-if __name__ == "__main__":
-    dotychczasowa_historia_operacji()
-    print(historia_operacji)
+
+# # wykonywane tylko przy odpaleniu tego pliku, czyli accountant.py
+# if __name__ == "__main__":
+#     dotychczasowa_historia_operacji()
+#     print(historia_operacji)
