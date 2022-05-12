@@ -8,9 +8,16 @@
     <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
 </head>
 <body>
-    <p> Przedział od {{ line_from }} do {{line_to}}:</p>
+    <hr />
+    <h2>WYBRANY PRZEDZIAŁ HISTORII OPERACJI</h2>
+    <hr />
+    <br />
+    <h5> Przedział od {{ line_from }} do {{ line_to }} (licząc od 0):</h5>
+    <br />
+    <p>
     {% for element in historia_czesc %}
         {{ element }} <br />
     {% endfor %}
+    </p>
 </body>
 </html>

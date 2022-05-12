@@ -8,11 +8,16 @@
     <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
 </head>
 <body>
-    <p> Historia operacji to:
-        <br /><br />
-        {% for element in historia_operacji %}
-            {{ element }} <br />
-        {% endfor %}
+    <hr />
+    <h2>HISTORIA OPERACJI</h2>
+    <hr />
+    <br />
+    <h5>Historia operacji to:</h5>
+    <br />
+    <p>
+    {% for element in historia_operacji %}
+        {{ element }} <br />
+    {% endfor %}
     </p>
 </body>
 </html>
