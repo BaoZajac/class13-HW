@@ -11,8 +11,7 @@ def main():
     return render_template("main.html", magazyn=magazyn, saldo=saldo)
 
 
-# @app.route('/historia/<line_from>/<line_to>/')
-@app.route('/historia/')
+@app.route('/historia/')  # , methods=['POST'])
 def historia():
     przeglad_func()
     return render_template("historia.html", historia_operacji=historia_operacji)
