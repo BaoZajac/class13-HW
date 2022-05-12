@@ -8,10 +8,10 @@ app = Flask(__name__)
 def main():
     magazyn_func()
     # print(magazyn)
-    return render_template("main.html", magazyn=magazyn, saldo=saldo)
+    return render_template("main.html", magazyn=magazyn, saldo=saldo)   #TODO: dlaczego saldo się nie wczytuje, a magazyn już tak?
 
 
-@app.route('/historia/')  # , methods=['POST'])
+@app.route('/historia/')  # , methods=['POST'])     #TODO:wielokrotne dodawanie historii, jak dodać POST?
 def historia():
     przeglad_func()
     return render_template("historia.html", historia_operacji=historia_operacji)
