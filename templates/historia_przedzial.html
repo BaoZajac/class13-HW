@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Historia-przedział</title>
+</head>
+<body>
+    <p> Przedział od {{ line_from }} do {{line_to}}:</p>
+    {% for element in historia_czesc %}
+        {{ element }} <br />
+    {% endfor %}
+</body>
+</html>

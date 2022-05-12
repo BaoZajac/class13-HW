@@ -136,6 +136,14 @@ def przeglad_func():  #abc):
     return historia_operacji
 
 
+def przeglad_przedzial():
+    dotychczasowa_historia_operacji()
+    historia_na_dzialania()
+    for element in historia_operacji[int(sys.argv[2]):int(sys.argv[3])+1]:
+        for element2 in element:
+            print(element2)
+
+
 # # wykonywane tylko przy odpaleniu tego pliku, czyli accountant.py
 # if __name__ == "__main__":
 #     dotychczasowa_historia_operacji()
