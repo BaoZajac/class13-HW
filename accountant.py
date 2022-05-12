@@ -1,5 +1,4 @@
 import sys
-# from flask import Flask, render_template
 
 historia_operacji = []
 magazyn = {}
@@ -85,26 +84,6 @@ def zapis_do_pliku():
                 f.write(element2 + "\n")
 
 
-# def konto_func():  # (abc):
-#     dotychczasowa_historia_operacji()
-#     saldo = historia_na_dzialania()[0]
-#     return render_template("main.html", saldo=saldo)
-
-
-# def stan_magazynu():
-#     dotychczasowa_historia_operacji()
-#     magazyn = historia_na_dzialania()[1]
-#     # historia_na_dzialania()
-#     # saldo = historia_na_dzialania()[0]
-#     # print(saldo)
-#     return magazyn  # , saldo
-
-
-# stan_magazynu()
-# print(magazyn)
-# print(saldo)
-
-
 def magazyn_func():  #abc):
     dotychczasowa_historia_operacji()
     # magazyn = historia_na_dzialania()[1]
@@ -113,13 +92,6 @@ def magazyn_func():  #abc):
     print(saldo)
     print(magazyn)
     return saldo, magazyn
-
-
-# def konto_func():
-#     dotychczasowa_historia_operacji()
-#     saldo = historia_na_dzialania()[0]
-#     print("x:", saldo)
-#     return saldo
 
 
 # magazyn_func()
@@ -142,9 +114,3 @@ def przeglad_przedzial():
     for element in historia_operacji[int(sys.argv[2]):int(sys.argv[3])+1]:
         for element2 in element:
             print(element2)
-
-
-# # wykonywane tylko przy odpaleniu tego pliku, czyli accountant.py
-# if __name__ == "__main__":
-#     dotychczasowa_historia_operacji()
-#     print(historia_operacji)

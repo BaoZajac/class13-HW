@@ -1,5 +1,5 @@
-from flask import Flask, render_template
-from accountant import magazyn, saldo, magazyn_func, przeglad_func, historia_operacji
+from flask import Flask, render_template, request, redirect
+from accountant import magazyn, saldo, magazyn_func, przeglad_func, historia_operacji, zapis_do_pliku
 
 app = Flask(__name__)
 
@@ -7,11 +7,19 @@ app = Flask(__name__)
 @app.route('/')
 def main():
     magazyn_func()
-    # print(magazyn)
-    return render_template("main.html", magazyn=magazyn, saldo=saldo)   #TODO: dlaczego saldo się nie wczytuje, a magazyn już tak?
+    if request.method == "POST":        # TODO: jak zapisać dane z formularza?
+        # data[request.form["name"]] = request.form["price"]
+        name = request.form["name"]
+        price = request.form["price"]
+        amount = request.form["amount"]
+        # data[name] = price
+        # magazyn[name] = amount
+        # zapis_do_pliku()
+        return redirect('/')
+    return render_template("main.html", magazyn=magazyn, saldo=saldo)   # TODO: dlaczego saldo się nie wczytuje, a magazyn już tak?
 
 
-@app.route('/historia/')  # , methods=['POST'])     #TODO:wielokrotne dodawanie historii, jak dodać POST?
+@app.route('/historia/')  # , methods=['POST'])     # TODO:wielokrotne dodawanie historii, jak dodać POST?
 def historia():
     przeglad_func()
     return render_template("historia.html", historia_operacji=historia_operacji)

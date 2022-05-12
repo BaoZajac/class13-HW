@@ -14,9 +14,6 @@
     <br />
     <p>Obecne saldo konta to: {{ saldo }}</p>
     <p>Obecny stan magazynowy: {{ magazyn }}</p>
-    <!--{% for item in magazyn %}-->
-    <!--{{ item }}-->
-    <!--{% endfor %}-->
     <br />
     <hr />
     <h5>FORMULARZ DO ZAKUPU</h5>
@@ -25,12 +22,12 @@
             <div class="col-4">
                 <div class="form-group">
                     <form action="" method="post">
-                        <label class="form-label" for="name">Nazwa produktu:</label>
-                        <input class="form-input" id="name" type="text" name="name" />
-                        <label class="form-label" for="price">Cena jednostkowa</label>
-                        <input class="form-input" id="price" type="number" min="0" step="0.01" name="price" />
-                        <label class="form-label" for="amount">Ilość sztuk</label>
-                        <input class="form-input" id="amount" type="number" min="0" step="1" name="amount" />
+                        <label class="form-label" for="name1">Nazwa produktu:</label>
+                        <input class="form-input" id="name1" type="text" name="name" />
+                        <label class="form-label" for="price1">Cena jednostkowa</label>
+                        <input class="form-input" id="price1" type="number" min="0" step="0.01" name="price" />
+                        <label class="form-label" for="amount1">Ilość sztuk</label>
+                        <input class="form-input" id="amount1" type="number" min="0" step="1" name="amount" />
                         <button class="btn btn-primary">DODAJ</button>
                     </form>
                 </div>
@@ -44,12 +41,12 @@
             <div class="col-4">
                 <div class="form-group">
                     <form action="" method="post">
-                        <label class="form-label" for="name">Nazwa produktu:</label>
-                        <input class="form-input" id="name" type="text" name="name" />
-                        <label class="form-label" for="price">Cena jednostkowa</label>
-                        <input class="form-input" id="price" type="number" min="0" step="0.01" name="price" />
-                        <label class="form-label" for="amount">Ilość sztuk</label>
-                        <input class="form-input" id="amount" type="number" min="0" step="1" name="amount" />
+                        <label class="form-label" for="name2">Nazwa produktu:</label>
+                        <input class="form-input" id="name2" type="text" name="name" />
+                        <label class="form-label" for="price2">Cena jednostkowa</label>
+                        <input class="form-input" id="price2" type="number" min="0" step="0.01" name="price" />
+                        <label class="form-label" for="amount2">Ilość sztuk</label>
+                        <input class="form-input" id="amount2" type="number" min="0" step="1" name="amount" />
                         <button class="btn btn-primary">DODAJ</button>
                     </form>
                 </div>
@@ -63,10 +60,10 @@
             <div class="col-4">
                 <div class="form-group">
                     <form action="" method="post">
-                        <label class="form-label" for="name">Komentarz:</label>
-                        <input class="form-input" id="name" type="text" name="name" />
-                        <label class="form-label" for="price">Wartość</label>
-                        <input class="form-input" id="price" type="number" min="0" step="0.01" name="price" />
+                        <label class="form-label" for="name3">Komentarz:</label>
+                        <input class="form-input" id="name3" type="text" name="name" />
+                        <label class="form-label" for="price3">Wartość</label>
+                        <input class="form-input" id="price3" type="number" min="0" step="0.01" name="price" />
                         <button class="btn btn-primary">DODAJ</button>
                     </form>
                 </div>
