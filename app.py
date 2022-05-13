@@ -7,16 +7,31 @@ app = Flask(__name__)
 @app.route('/')
 def main():
     magazyn_func()
+    # if request.method == "POST":        # TODO: jak zapisać dane z formularza?
+    #     # data[request.form["name"]] = request.form["price"]
+    #     name = request.form["name2"]
+    #     price = request.form["price2"]
+    #     amount = request.form["amount2"]
+    #     # data[name] = price
+    #     # magazyn[name] = amount
+    #     # zapis_do_pliku()
+    #     print(name, price, amount)
+    #     return render_template("main.html")  # redirect('/')
+    return render_template("main.html", magazyn=magazyn, saldo=saldo)   # TODO: dlaczego saldo się nie wczytuje, a magazyn już tak?
+
+
+@app.route('/')
+def formularz():
     if request.method == "POST":        # TODO: jak zapisać dane z formularza?
         # data[request.form["name"]] = request.form["price"]
-        name = request.form["name"]
-        price = request.form["price"]
-        amount = request.form["amount"]
+        name = request.form["name2"]
+        price = request.form["price2"]
+        amount = request.form["amount2"]
         # data[name] = price
         # magazyn[name] = amount
         # zapis_do_pliku()
-        return redirect('/')
-    return render_template("main.html", magazyn=magazyn, saldo=saldo)   # TODO: dlaczego saldo się nie wczytuje, a magazyn już tak?
+        print(name, price, amount)
+    return render_template("main.html")  # redirect('/')
 
 
 @app.route('/historia/')  # , methods=['POST'])     # TODO:wielokrotne dodawanie historii, jak dodać POST?
