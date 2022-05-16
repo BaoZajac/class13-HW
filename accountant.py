@@ -7,6 +7,9 @@ saldo = 0
 file_path = "in.txt"
 
 
+
+
+
 # wczytywanie danych z zewnętrznego pliku z historią operacji i zapisanie ich do historii operacji wewnątrz programu
 def dotychczasowa_historia_operacji():
     with open(file_path, 'r') as f:
