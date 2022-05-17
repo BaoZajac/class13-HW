@@ -1,5 +1,4 @@
 from flask import Flask, render_template, request, redirect
-from accountant import przeglad_func, historia_operacji  # magazyn, saldo, magazyn_func, zapis_do_pliku
 from manager import Manager
 
 app = Flask(__name__)
@@ -40,19 +39,13 @@ def error():
     return render_template("error.html"), {"Refresh": "4; url=/"}
 
 
-@app.route('/historia/')  # , methods=['POST'])     # TODO:wielokrotne dodawanie historii, jak dodać POST?
+@app.route('/historia/')
 def historia():
-    przeglad_func()
-    return render_template("historia.html", historia_operacji=historia_operacji)
+    return render_template("historia.html", historia_operacji=manager.historia_operacji)
 
 
 @app.route('/historia/<line_from>/<line_to>/')
 def historia_przedzial(line_from, line_to):
-    przeglad_func()
-    historia_czesc = historia_operacji[int(line_from):int(line_to) + 1]
+    historia_czesc = manager.historia_operacji[int(line_from):int(line_to) + 1]
     return render_template("historia_przedzial.html",
                            historia_czesc=historia_czesc, line_from=line_from, line_to=line_to)
-
-
-
-
