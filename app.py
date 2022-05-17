@@ -29,6 +29,7 @@ def main():
         if manager.error == 0:
             manager.zapis_do_pliku()
         else:
+            del manager.historia_operacji[-1]
             return redirect('/error/')
         return redirect('/')
     return render_template("main.html", magazyn=manager.magazyn, saldo=manager.saldo)
