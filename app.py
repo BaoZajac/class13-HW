@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect
-from accountant import magazyn, saldo, magazyn_func, przeglad_func, historia_operacji, zapis_do_pliku
+from accountant import przeglad_func, historia_operacji  # magazyn, saldo, magazyn_func, zapis_do_pliku
 from manager import Manager
 
 app = Flask(__name__)
@@ -29,8 +29,15 @@ def main():
         manager.historia_operacji.append(polecenie)
         if manager.error == 0:
             manager.zapis_do_pliku()
-        return redirect("/")
-    return render_template("main.html", magazyn=manager.magazyn, saldo=manager.saldo)   # TODO: dlaczego saldo się nie wczytuje, a magazyn już tak?
+        else:
+            return redirect('/error/')
+        return redirect('/')
+    return render_template("main.html", magazyn=manager.magazyn, saldo=manager.saldo)
+
+
+@app.route('/error/')
+def error():
+    return render_template("error.html"), {"Refresh": "4; url=/"}
 
 
 @app.route('/historia/')  # , methods=['POST'])     # TODO:wielokrotne dodawanie historii, jak dodać POST?

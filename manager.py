@@ -1,10 +1,3 @@
-# import sys
-# from accountant import dotychczasowa_historia_operacji
-# from accountant import historia_operacji
-# from accountant import historia_na_dzialania
-# from accountant import zapis_do_pliku
-
-
 class Manager:
     def __init__(self, file_path):
         self.saldo = 0
@@ -99,5 +92,3 @@ class Manager:
                 for element2 in element:
                     f.write(element2 + "\n")
             f.write("stop" + "\n")
-
-
