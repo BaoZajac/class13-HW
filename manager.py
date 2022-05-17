@@ -11,9 +11,9 @@ class Manager:
         self.magazyn = {}
         self.historia_operacji = []
         self.file_path = file_path
+        self.error = 0
         self.dotychczasowa_historia_operacji()
         self.historia_na_dzialania()
-
 
     # wczytywanie danych z zewnętrznego pliku z historią operacji i zapisanie ich do historii operacji wewnątrz programu
     def dotychczasowa_historia_operacji(self):
@@ -42,38 +42,51 @@ class Manager:
                 self.historia_operacji.append(obecna_lista)
 
     def saldo_func(self, polecenie):
+        self.error = 0
         kwota = polecenie[1]
         self.saldo += int(kwota)
         if self.saldo < 0:
             print("Brak wystarczających środków na koncie do przeprowadzenia operacji")
+            self.saldo -= int(kwota)
+            self.error = 1
 
     def zakup_func(self, polecenie):
+        self.error = 0
         kwota = int(polecenie[2]) * int(polecenie[3])
         self.saldo -= kwota
-        if self.saldo < 0 or int(polecenie[2]) < 0 or int(polecenie[3]) < 0:
-            print("Błąd")
         przedmiot = polecenie[1]
         if not self.magazyn.get(przedmiot):
             self.magazyn[przedmiot] = 0
-        self.magazyn[przedmiot] += int(polecenie[3])
+        if self.saldo < 0 or int(polecenie[2]) < 0 or int(polecenie[3]) < 0:
+            print("Błąd")
+            self.saldo += kwota
+            self.error = 1
+        else:
+            self.magazyn[przedmiot] += int(polecenie[3])
 
     def sprzedaz_func(self, polecenie):
+        self.error = 0
         kwota = int(polecenie[2]) * int(polecenie[3])
         self.saldo += kwota
+        if not self.magazyn.get(polecenie[1]):
+            self.magazyn[polecenie[1]] = 0
         liczba_sztuk_w_magazynie = int(self.magazyn[polecenie[1]])
         if liczba_sztuk_w_magazynie < int(polecenie[3]) or int(polecenie[2]) < 0 or int(polecenie[3]) < 0:
             print("Błąd")
-        self.magazyn[polecenie[1]] -= int(polecenie[3])
+            self.saldo -= kwota
+            self.error = 1
+        else:
+            self.magazyn[polecenie[1]] -= int(polecenie[3])
 
     # przerobienie historii operacji na działania
     def historia_na_dzialania(self):
-        for polecenie in self.historia_operacji:
-            if polecenie[0] == "saldo":
-                self.saldo_func(polecenie)
-            elif polecenie[0] == "zakup":
-                self.zakup_func(polecenie)
-            elif polecenie[0] == "sprzedaz":
-                self.sprzedaz_func(polecenie)
+        for polec in self.historia_operacji:
+            if polec[0] == "saldo":
+                self.saldo_func(polec)
+            elif polec[0] == "zakup":
+                self.zakup_func(polec)
+            elif polec[0] == "sprzedaz":
+                self.sprzedaz_func(polec)
             else:
                 break
 
@@ -86,26 +99,5 @@ class Manager:
                 for element2 in element:
                     f.write(element2 + "\n")
             f.write("stop" + "\n")
-
-
-
-# def sprzedaz_func(abc):
-#     dotychczasowa_historia_operacji()
-#     # wczytanie danych wejsciowych uruchamiających program i zapisanie ich w historii operacji
-#     nazwa_zakup = sys.argv[2]
-#     cena_jednostkowa = sys.argv[3]
-#     liczba_sztuk = sys.argv[4]
-#     obecna_lista = (sys.argv[0][0:len(sys.argv[0])-3], nazwa_zakup, cena_jednostkowa, liczba_sztuk)
-#     historia_operacji.append(obecna_lista)
-#     historia_operacji.append(("stop",))
-#
-#     if historia_na_dzialania() == "Błąd":
-#         print("Błąd")
-#     else:
-#         zapis_do_pliku()
-
-
-
-
 
 

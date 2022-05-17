@@ -8,14 +8,26 @@ manager = Manager("in.txt")
 
 @app.route('/', methods=['POST', 'GET'])
 def main():
-    if request.method == "POST":        # TODO: jak zapisać dane z formularza?
-        if request.form["nazwa"] == "sprzedaz":
+    if request.method == "POST":
+        if request.form["operacja"] == "sprzedaz":
             name = request.form["name2"]
             price = request.form["price2"]
             amount = request.form["amount2"]
             polecenie = ("sprzedaz", name, price, amount)
             manager.sprzedaz_func(polecenie)
-            manager.historia_operacji.append(polecenie)
+        elif request.form["operacja"] == "zakup":
+            name = request.form["name1"]
+            price = request.form["price1"]
+            amount = request.form["amount1"]
+            polecenie = ("zakup", name, price, amount)
+            manager.zakup_func(polecenie)
+        elif request.form["operacja"] == "saldo":
+            name = request.form["name3"]
+            price = request.form["price3"]
+            polecenie = ("saldo", price, name)
+            manager.saldo_func(polecenie)
+        manager.historia_operacji.append(polecenie)
+        if manager.error == 0:
             manager.zapis_do_pliku()
         return redirect("/")
     return render_template("main.html", magazyn=manager.magazyn, saldo=manager.saldo)   # TODO: dlaczego saldo się nie wczytuje, a magazyn już tak?
